@@ -10,7 +10,7 @@
     "clean": "rm -rf ./output/dist && rm -rf output",
     "package": "npm run clean && npm run dist && npm run copy && npm run dist:legacy && npm run copy",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "release": "dojo-release"
+    "release": "npm run package && dojo-release"
   },
   "peerDependencies": {
     "@dojo/framework": "next",

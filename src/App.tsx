@@ -7,14 +7,9 @@ import readme from "./readme.block";
 import getWidgetProperties, { PropertyInterface } from "./properties.block";
 import getTheme from "./theme.block";
 import code from "./code.block";
-import Menu from "./Menu";
-import SideMenu from "./SideMenu";
 import Example from "./Example";
 import ThemeTable from "./ThemeTable";
 import PropertyTable from "./PropertyTable";
-
-import * as css from "./App.m.css";
-import Landing from "./Landing";
 
 function getWidgetFileNames(
   config: any,
@@ -215,24 +210,24 @@ export default factory(function App({ properties, middleware: { block } }) {
                               <div classes="flex flex-col justify-between overflow-y-auto sticky top-16 max-h-(screen-16) pt-12 pb-4 -mt-12">
                                 <div classes="mb-8">
                                   <h5 classes="text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">
-									  { widgetName }
+                                    {widgetName}
                                   </h5>
                                   <ul classes="mt-4 overflow-x-hidden">
-                                          <li classes="mb-2">
-									<ActiveLink
-										key={'basic'}
-										classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
-										to="example"
-										params={{
-										widget: widgetName,
-										example: 'basic'
-										}}
-										activeClasses={["none"]}
-									>
-									Overview
-									</ActiveLink>
-									</li>
-                                    {widgetConfig.examples.map(
+                                    <li classes="mb-2">
+                                      <ActiveLink
+                                        key={"basic"}
+                                        classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
+                                        to="example"
+                                        params={{
+                                          widget: widgetName,
+                                          example: "basic"
+                                        }}
+                                        activeClasses={["none"]}
+                                      >
+                                        Overview
+                                      </ActiveLink>
+                                    </li>
+                                    {(widgetConfig.examples || []).map(
                                       (example: any) => {
                                         return (
                                           <li classes="mb-2">
