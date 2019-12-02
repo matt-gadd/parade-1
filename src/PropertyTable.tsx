@@ -22,16 +22,24 @@ export default factory(function PropertyTable({ properties }) {
 						<tr>
 							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Name</th>
 							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Type</th>
-							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Description</th>
+							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>
+								Description
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						{props.map((prop) => {
 							return (
 								<tr>
-									<td classes={'border border-gray-400 px-4 py-2'}>{`${prop.name}${prop.optional ? '?' : ''}`}</td>
-									<td classes={'border border-gray-400 px-4 py-2'}>{prop.type}</td>
-									<td classes={'border border-gray-400 px-4 py-2'}>{prop.description}</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>{`${
+										prop.name
+									}${prop.optional ? '?' : ''}`}</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>
+										{prop.type}
+									</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>
+										{prop.description}
+									</td>
 								</tr>
 							);
 						})}

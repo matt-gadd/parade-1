@@ -20,7 +20,9 @@ export default factory(function ThemeTable({ properties }) {
 					<thead>
 						<tr>
 							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Name</th>
-							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Description</th>
+							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>
+								Description
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,7 +30,9 @@ export default factory(function ThemeTable({ properties }) {
 							return (
 								<tr>
 									<td classes={'border border-gray-400 px-4 py-2'}>{key}</td>
-									<td classes={'border border-gray-400 px-4 py-2'}>{themes[key]}</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>
+										{themes[key]}
+									</td>
 								</tr>
 							);
 						})}

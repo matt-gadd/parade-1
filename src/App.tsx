@@ -93,7 +93,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 					<div classes={'w-full max-w-screen-xl relative mx-auto px-6'}>
 						<div classes={'flex items-center -mx-6'}>
 							<div classes={'lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8'}>
-								<h1 classes={'text-4xl'}>{ config.name || 'Parade' }</h1>
+								<h1 classes={'text-4xl'}>{config.name || 'Parade'}</h1>
 							</div>
 						</div>
 					</div>
@@ -116,7 +116,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 									}
 								>
 									<div classes="mb-10">
-										{ config.home &&
+										{config.home && (
 											<ActiveLink
 												to="landing"
 												classes="flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-medium text-gray-600"
@@ -124,8 +124,10 @@ export default factory(function App({ properties, middleware: { block } }) {
 											>
 												Home
 											</ActiveLink>
-										}
-										{ config.home && <hr classes="my-1 border-b-2 border-gray-200" /> }
+										)}
+										{config.home && (
+											<hr classes="my-1 border-b-2 border-gray-200" />
+										)}
 										{widgets.map((widget) => {
 											return (
 												<ActiveLink
@@ -151,23 +153,25 @@ export default factory(function App({ properties, middleware: { block } }) {
 							id="content-wrapper"
 							classes="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5"
 						>
-							<Outlet id="landing" renderer={ () => {
-								const readmeContent = widgetReadmeContent[config.home];
-								return (
-									<div id="content">
-										<div id="app" classes="flex">
-											<div classes="pt-24 pb-16 lg:pt-28 w-full">
-												<div classes="flex">
-													<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
-														<div
-															innerHTML={readmeContent}
-														/>
+							<Outlet
+								id="landing"
+								renderer={() => {
+									const readmeContent = widgetReadmeContent[config.home];
+									return (
+										<div id="content">
+											<div id="app" classes="flex">
+												<div classes="pt-24 pb-16 lg:pt-28 w-full">
+													<div classes="flex">
+														<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
+															<div innerHTML={readmeContent} />
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-							)} } />
+									);
+								}}
+							/>
 							<Outlet
 								id="example"
 								renderer={({ params, queryParams }) => {
