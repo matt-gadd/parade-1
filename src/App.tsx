@@ -222,11 +222,9 @@ export default factory(function App({ properties, middleware: { block } }) {
 															>
 																<example.module />
 															</Example>
-															{includeDocs && (
+															{config.codesandboxPath && (
 																<a
-																	href={`https://codesandbox.io/s/github/dojo/widgets/tree/master/src/examples?fontsize=14&initialpath=%23%2Fwidget%2F${widgetName}%2F${example.filename.toLowerCase()}&module=%2Fsrc%2Fwidgets%2F${widgetName}%2F${
-																		example.filename
-																	}.tsx`}
+																	href={config.codesandboxPath(widgetName, example.filename)}
 																>
 																	<img
 																		alt={`Edit ${widgetPath} example`}
