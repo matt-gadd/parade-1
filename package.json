@@ -42,5 +42,12 @@
     "prettier": "^1.19.1",
     "shx": "^0.3.2",
     "typescript": "~3.4.5"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 4,
+    "useTabs": true,
+    "printWidth": 100,
+    "arrowParens": "always"
   }
 }
