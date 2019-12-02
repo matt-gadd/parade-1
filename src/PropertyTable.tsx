@@ -16,22 +16,22 @@ export default factory(function PropertyTable({ properties }) {
 		<virtual>
 			<hr classes="my-8 border-b-2 border-gray-200" />
 			<h3 classes={'text-3xl'}>Properties</h3>
-			<div classes={['docs']}>
-				<table>
+			<div>
+				<table classes={'border-collapse border-2 border-gray-400'}>
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Type</th>
-							<th>Description</th>
+							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Name</th>
+							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Type</th>
+							<th classes={'border border-gray-400 px-4 py-2 text-gray-800'}>Description</th>
 						</tr>
 					</thead>
 					<tbody>
 						{props.map((prop) => {
 							return (
 								<tr>
-									<td>{`${prop.name}${prop.optional ? '?' : ''}`}</td>
-									<td>{prop.type}</td>
-									<td>{prop.description}</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>{`${prop.name}${prop.optional ? '?' : ''}`}</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>{prop.type}</td>
+									<td classes={'border border-gray-400 px-4 py-2'}>{prop.description}</td>
 								</tr>
 							);
 						})}

@@ -79,36 +79,6 @@ a {
 	color: inherit;
 }
 
-.docs {
-	overflow: auto;
-}
-
-.docs table {
-	background: #282a36;
-	border-collapse: collapse;
-	border: 1px solid #282a36;
-}
-
-.docs th {
-	text-align: left;
-	font-weight: bold;
-	color: white;
-	padding: 10px 15px;
-}
-
-.docs thead {
-	font-size: 14px;
-}
-
-.docs tbody {
-	background: white;
-}
-
-.docs td {
-	text-align: left;
-	padding: 10px 15px;
-}
-
 /**
  * Dracula Theme originally by Zeno Rocha [@zenorocha]
  * https://draculatheme.com/

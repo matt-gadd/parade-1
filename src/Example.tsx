@@ -13,18 +13,11 @@ const factory = create({ injector }).properties<ExampleProperties>();
 
 export default factory(function Example({ children, properties, middleware: { injector } }) {
 	const { content, widgetName } = properties();
-	const tabNames = ['example'];
 
-	if (content) {
-		tabNames.push('code');
-	}
-	if (!has('docs')) {
-		tabNames.push('tests');
-	}
 	const tabs = [
 		<div>
 			<h3 classes={'text-2xl'}>Demo</h3>
-			<div>{children()}</div>
+			<div classes={'px-4 py-12 border-2 border-gray-400'}>{children()}</div>
 		</div>
 	];
 	if (content) {
