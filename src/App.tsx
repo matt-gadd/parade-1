@@ -94,7 +94,15 @@ export default factory(function App({ properties, middleware: { block } }) {
           classes={
             "flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center"
           }
-        ></div>
+        >
+          <div classes={"w-full max-w-screen-xl relative mx-auto px-6"}>
+            <div classes={"flex items-center -mx-6"}>
+              <div classes={"lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8"}>
+                <h1 classes={"text-4xl"}>@dojo/widgets</h1>
+              </div>
+            </div>
+          </div>
+        </div>
         <div classes={"w-full max-w-screen-xl mx-auto px-6"}>
           <div classes={"lg:flex -mx-6"}>
             <div
@@ -120,8 +128,7 @@ export default factory(function App({ properties, middleware: { block } }) {
                           classes="flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-medium text-gray-600"
                           params={{
                             widget,
-                            example: "basic",
-                            active: "example"
+                            example: "basic"
                           }}
                           matchParams={{ widget }}
                           activeClasses={["text-gray-900"]}
@@ -143,9 +150,6 @@ export default factory(function App({ properties, middleware: { block } }) {
                 id="example"
                 renderer={({ params, queryParams }) => {
                   const { widget: widgetName, example: exampleName } = params;
-                  const active = queryParams.active
-                    ? queryParams.active
-                    : "example";
                   const widgetConfig = configs[widgetName];
                   const { overview, examples = [] } = widgetConfig;
                   const isBasic = exampleName === "basic";
@@ -167,29 +171,24 @@ export default factory(function App({ properties, middleware: { block } }) {
                   const content = widgetExampleContent[widgetPath];
                   const propertyInterface = widgetProperties[widgetName];
                   const themeClasses = widgetThemeClasses[widgetName];
-                  debugger;
                   return (
                     <div id="content">
                       <div id="app" classes="flex">
                         <div classes="pt-24 pb-16 lg:pt-28 w-full">
-                          <div classes="markdown mb-6 px-6 max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:px-12 xl:w-3/4">
-                            <h1>Component Examples</h1>{" "}
-                            <div classes="mt-0 mb-4 text-gray-600">
-                              Learn how to build common UI components using
-                              utility classes.
-                            </div>
-                            <hr classes="my-8 border-b-2 border-gray-200" />
-                          </div>
                           <div classes="flex">
                             <div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
                               {isBasic && includeDocs && (
-                                <div innerHTML={readmeContent} />
+                                <div>
+                                  <div innerHTML={readmeContent} />
+                                  <hr classes="my-8 border-b-2 border-gray-200" />
+                                </div>
                               )}
-                              <h1>{isBasic ? "Basic Usage" : example.title}</h1>
+                              <h2 classes={"text-3xl"}>
+                                {isBasic ? "Basic Usage" : example.title}
+                              </h2>
                               <Example
                                 widgetName={widgetName}
                                 content={content}
-                                active={active}
                               >
                                 <example.module />
                               </Example>
@@ -216,7 +215,7 @@ export default factory(function App({ properties, middleware: { block } }) {
                               <div classes="flex flex-col justify-between overflow-y-auto sticky top-16 max-h-(screen-16) pt-12 pb-4 -mt-12">
                                 <div classes="mb-8">
                                   <h5 classes="text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">
-                                    On this page
+                                    Examples
                                   </h5>
                                   <ul classes="mt-4 overflow-x-hidden">
                                     {widgetConfig.examples.map(

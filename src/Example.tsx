@@ -7,7 +7,6 @@ import * as css from "./Example.m.css";
 interface ExampleProperties {
   content?: string;
   widgetName: string;
-  active: string;
 }
 
 const factory = create({ injector }).properties<ExampleProperties>();
@@ -17,7 +16,7 @@ export default factory(function Example({
   properties,
   middleware: { injector }
 }) {
-  const { content, widgetName, active } = properties();
+  const { content, widgetName } = properties();
   const tabNames = ["example"];
 
   if (content) {
@@ -26,18 +25,16 @@ export default factory(function Example({
   if (!has("docs")) {
     tabNames.push("tests");
   }
-  const activeTab =
-    tabNames.indexOf(active) === -1 ? 0 : tabNames.indexOf(active);
   const tabs = [
     <div>
-      <h3>Demo</h3>
-      {children()}
+      <h3 classes={"text-2xl"}>Demo</h3>
+      <div>{children()}</div>
     </div>
   ];
   if (content) {
     tabs.push(
       <div>
-        <h3>Code</h3>
+        <h3 classes={"text-2xl"}>Code</h3>
         <pre classes={["language-ts"]}>
           <code classes={["language-ts"]} innerHTML={content} />
         </pre>
@@ -47,12 +44,10 @@ export default factory(function Example({
   if (!has("docs")) {
     tabs.push(
       <div>
-        {activeTab === tabNames.indexOf("tests") && (
-          <iframe
-            classes={css.iframe}
-            src={`./intern?config=intern/intern.json&widget=${widgetName}`}
-          />
-        )}
+        <iframe
+          classes={css.iframe}
+          src={`./intern?config=intern/intern.json&widget=${widgetName}`}
+        />
       </div>
     );
   }

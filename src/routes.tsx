@@ -9,7 +9,7 @@ export default [
     outlet: "basic",
     children: [
       {
-        path: "{example}?{active}",
+        path: "{example}",
         outlet: "example"
       }
     ]
