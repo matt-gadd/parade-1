@@ -33,7 +33,7 @@
   "devDependencies": {
     "@dojo/cli": "^7.0.0-alpha.1",
     "@dojo/cli-build-app": "next",
-    "@dojo/cli-build-widget": "^7.0.0-alpha.4",
+    "@dojo/cli-build-widget": "../../Downloads/dojo-cli-build-widget-7.0.0-alpha.2.tgz",
     "@dojo/framework": "next",
     "@dojo/scripts": "^4.0.2",
     "@dojo/themes": "^6.0.0",

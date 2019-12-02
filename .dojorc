@@ -47,10 +47,6 @@
 					"to": "parade.json"
 				},
 				{
-					"from": "src/main.css",
-					"to": "main.css"
-				},
-				{
 					"from": "intern",
 					"to": "intern"
 				}
