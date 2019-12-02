@@ -215,9 +215,23 @@ export default factory(function App({ properties, middleware: { block } }) {
                               <div classes="flex flex-col justify-between overflow-y-auto sticky top-16 max-h-(screen-16) pt-12 pb-4 -mt-12">
                                 <div classes="mb-8">
                                   <h5 classes="text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">
-                                    Examples
+									  { widgetName }
                                   </h5>
                                   <ul classes="mt-4 overflow-x-hidden">
+                                          <li classes="mb-2">
+									<ActiveLink
+										key={'basic'}
+										classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
+										to="example"
+										params={{
+										widget: widgetName,
+										example: 'basic'
+										}}
+										activeClasses={["none"]}
+									>
+									Overview
+									</ActiveLink>
+									</li>
                                     {widgetConfig.examples.map(
                                       (example: any) => {
                                         return (
@@ -227,7 +241,7 @@ export default factory(function App({ properties, middleware: { block } }) {
                                               classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
                                               to="example"
                                               params={{
-                                                widget: name,
+                                                widget: widgetName,
                                                 example: example.filename.toLowerCase()
                                               }}
                                               activeClasses={["none"]}
