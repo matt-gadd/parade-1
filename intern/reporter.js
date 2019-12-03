@@ -20,13 +20,24 @@ body {
 	border-top-width: 0px !important;
 	border-left-width: 0px !important;
 	border-color: #cbd5e0 !important;
-	color: #2d3748 !important;
 	padding-left: 1rem !important;
 	padding-right: 1rem !important;
 	padding-top: .5rem !important;
 	padding-bottom: .5rem !important;
-	font-weight: bold !important;
-	font-size: 16px !important;
+	font-weight: 600 !important;
+	font-size: .875rem !important;
+	color: #4a5568 !important;
+}
+
+.suite .title {
+	background-color: #f7fafc !important;
+	border-top-left-radius: .5rem !important;
+}
+
+.suite .column-info {
+	background-color: #f7fafc !important;
+	border-top-right-radius: .5rem !important;
+	width: 55% !important;
 }
 
 .suite .title, .suite .column-info {
@@ -45,11 +56,11 @@ tr:first-child .title, tr:first-child .column-info {
 .suite .column-info {
 	border-right-width: 0px !important;
 	border-color: #cbd5e0 !impotant;
-	min-width: 200px !important;
 }
 
 .testResult td {
 	border: none !important;
+	font-size: .875rem !important;
 }
 
 .internReportContainer {
@@ -85,7 +96,7 @@ tr.testResult.passed {
 	unicode-bidi: embed;
 	font-family: monospace;
 	white-space: pre-wrap;
-	font-size: 14px !important;
+	font-size: .775rem !important;
 }
 
 .internReportContainer {

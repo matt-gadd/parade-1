@@ -21,12 +21,16 @@ export default factory(function ThemeTable({ properties }) {
 						<tr>
 							<th
 								classes={
-									'px-4 py-2 text-gray-800 border-r border-b border-gray-400'
+									'px-4 py-2 border-r border-b border-gray-400 text-sm font-semibold text-gray-700 p-2 bg-gray-100 rounded-tl-lg'
 								}
 							>
 								Name
 							</th>
-							<th classes={'px-4 py-2 text-gray-800 border-b border-gray-400'}>
+							<th
+								classes={
+									'px-4 py-2 border-b border-gray-400 text-sm font-semibold text-gray-700 p-2 bg-gray-100 rounded-tr-lg'
+								}
+							>
 								Description
 							</th>
 						</tr>
@@ -35,8 +39,8 @@ export default factory(function ThemeTable({ properties }) {
 						{Object.keys(themes).map((key) => {
 							return (
 								<tr>
-									<td classes={'px-4 py-2'}>{key}</td>
-									<td classes={'px-4 py-2'}>{themes[key]}</td>
+									<td classes={'px-4 py-2 text-sm'}>{key}</td>
+									<td classes={'px-4 py-2 text-sm'}>{themes[key]}</td>
 								</tr>
 							);
 						})}
