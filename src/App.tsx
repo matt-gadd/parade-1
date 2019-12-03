@@ -154,7 +154,7 @@ const main = ({
 													widget: widgetName,
 													example: 'basic'
 												}}
-												activeClasses={['none']}
+												activeClasses={['font-bold']}
 											>
 												Overview
 											</ActiveLink>
@@ -164,7 +164,7 @@ const main = ({
 												key={'basic'}
 												classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
 												to="tests"
-												activeClasses={['none']}
+												activeClasses={['font-bold']}
 											>
 												Tests
 											</ActiveLink>
@@ -183,7 +183,7 @@ const main = ({
 															widget: widgetName,
 															example: example.filename.toLowerCase()
 														}}
-														activeClasses={['none']}
+														activeClasses={['font-bold']}
 													>
 														{example.filename
 															.replace(/([A-Z])/g, ' $1')
@@ -258,7 +258,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 										<ActiveLink
 											to="landing"
 											classes="flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-medium text-gray-600"
-											activeClasses={['text-gray-900']}
+											activeClasses={['font-bold']}
 										>
 											Home
 										</ActiveLink>
@@ -276,7 +276,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 													example: 'basic'
 												}}
 												matchParams={{ widget }}
-												activeClasses={['text-gray-900']}
+												activeClasses={['font-bold']}
 											>
 												{formatWidgetName(widget)}
 											</ActiveLink>
