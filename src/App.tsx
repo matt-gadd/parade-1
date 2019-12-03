@@ -62,8 +62,176 @@ interface Content {
 	[index: string]: string;
 }
 
+const main = ({ test, config, exampleName, widgetName, widgetProperties, widgetThemeClasses, widgetExampleContent, widgetReadmeContent }: any) => {
+	const widgetConfig = config.widgets[widgetName];
+	const { overview, examples = [] } = widgetConfig;
+	const isBasic = exampleName === 'basic';
+	const readmeContent =
+		widgetReadmeContent[config.readmePath(widgetName)];
+	const example = isBasic
+		? overview.example
+		: examples.find(
+				(example: any) =>
+					example.filename.toLowerCase() === exampleName
+			);
+	let widgetPath, content, propertyInterface, themeClasses;
+	if (isBasic) {
+		widgetPath = config.examplePath(
+			widgetName,
+			example.filename
+		);
+		content = widgetExampleContent[widgetPath];
+		propertyInterface = widgetProperties[widgetName];
+		themeClasses = widgetThemeClasses[widgetName];
+	}
+	return (
+		<div id="content">
+			<div id="app" classes="flex">
+				<div classes="pt-24 pb-16 lg:pt-28 w-full">
+					<div classes="flex">
+						<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
+							{isBasic && (
+								<div>
+									<div
+										innerHTML={readmeContent}
+									/>
+									<hr classes="my-8 border-b-2 border-gray-200" />
+								</div>
+							)}
+							{ !test && (
+							<div>
+							<h2 classes={'text-3xl mb-4'}>
+								{isBasic
+									? 'Basic Usage'
+									: example.title}
+								</h2>
+								<Example
+									widgetName={widgetName}
+									content={content}
+								>
+									<example.module />
+								</Example>
+								<div classes={'my-8'}>
+									{config.codesandboxPath && (
+										<a
+											href={config.codesandboxPath(
+												widgetName,
+												example.filename
+											)}
+										>
+											<img
+												alt={`Edit ${widgetPath} example`}
+												src="https://codesandbox.io/static/img/play-codesandbox.svg"
+											/>
+										</a>
+									)}
+								</div>
+								{isBasic && (
+									<PropertyTable
+										props={propertyInterface}
+									/>
+									)}
+									{isBasic && (
+										<ThemeTable themes={themeClasses} />
+										)}
+								</div>) }
+										{config.tests && test && (
+											<div>
+												<hr classes="my-8 border-b-2 border-gray-200" />
+												<h2 classes={'text-3xl mb-4'}>
+													Tests
+												</h2>
+												<iframe
+													classes={'w-full'}
+													onload={
+														"this.style.height=this.contentDocument.body.scrollHeight +'px';" as any
+													}
+													src={`./intern?config=intern/intern.json&widget=${widgetName}`}
+												/>
+											</div>
+										)}
+									</div>
+									<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
+										<div classes="flex flex-col justify-between overflow-y-auto sticky top-16 max-h-(screen-16) pt-12 pb-4 -mt-12">
+											<div classes="mb-8">
+												<h5 classes="text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">
+													{widgetName}
+												</h5>
+												<ul classes="mt-4 overflow-x-hidden">
+													<li classes="mb-2">
+														<ActiveLink
+															key={'basic'}
+															classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
+															to="example"
+															params={{
+																widget: widgetName,
+																example: 'basic'
+															}}
+															activeClasses={[
+																'none'
+															]}
+														>
+															Overview
+														</ActiveLink>
+													</li>
+													<li classes="mb-2">
+														<ActiveLink
+															key={'basic'}
+															classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
+															to="tests"
+															activeClasses={[
+																'none'
+															]}
+														>
+															Tests
+														</ActiveLink>
+													</li>
+												</ul>
+												<hr classes="my-1 border-b-2 border-gray-200" />
+												<ul classes="mt-4 overflow-x-hidden">
+													{(
+														widgetConfig.examples ||
+															[]
+													).map((example: any) => {
+														return (
+															<li classes="mb-2">
+																<ActiveLink
+																	key={
+																		example.filename
+																	}
+																	classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
+																	to="example"
+																	params={{
+																		widget: widgetName,
+																		example: example.filename.toLowerCase()
+																	}}
+																	activeClasses={[
+																		'none'
+																	]}
+																>
+																	{example.filename
+																		.replace(
+																			/([A-Z])/g,
+																			' $1'
+																		)
+																		.trim()}
+																	</ActiveLink>
+																</li>
+														);
+													})}
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	);
+};
+
 export default factory(function App({ properties, middleware: { block } }) {
-	const { includeDocs, config } = properties();
+	const { config } = properties();
 	const configs = config.widgets;
 	const widgets = Object.keys(configs).sort();
 	const widgetFilenames = getWidgetFileNames(configs, config.widgetPath);
@@ -76,13 +244,10 @@ export default factory(function App({ properties, middleware: { block } }) {
 	let widgetExampleContent: Content = {};
 	let widgetProperties: { [index: string]: PropertyInterface[] } = {};
 	let widgetThemeClasses: { [index: string]: { [index: string]: string } } = {};
-	if (includeDocs) {
-		widgetReadmeContent = block(readme)(readmeFilenames) || {};
-		widgetExampleContent = block(code)(exampleFilenames) || {};
-		widgetProperties = block(getWidgetProperties)(widgetFilenames) || {};
-		widgetThemeClasses = block(getTheme)(widgetFilenames) || {};
-	}
-	if (true) {
+	widgetReadmeContent = block(readme)(readmeFilenames) || {};
+	widgetExampleContent = block(code)(exampleFilenames) || {};
+	widgetProperties = block(getWidgetProperties)(widgetFilenames) || {};
+	widgetThemeClasses = block(getTheme)(widgetFilenames) || {};
 		return (
 			<div>
 				<div
@@ -173,175 +338,17 @@ export default factory(function App({ properties, middleware: { block } }) {
 								}}
 							/>
 							<Outlet
+								id="tests"
+								renderer={({ params, queryParams }) => {
+									const { widget: widgetName, example: exampleName } = params;
+									return main({ test: true, config, widgetName, exampleName, widgetProperties, widgetThemeClasses, widgetExampleContent, widgetReadmeContent });
+								}}
+							/>
+							<Outlet
 								id="example"
 								renderer={({ params, queryParams }) => {
 									const { widget: widgetName, example: exampleName } = params;
-									const widgetConfig = configs[widgetName];
-									const { overview, examples = [] } = widgetConfig;
-									const isBasic = exampleName === 'basic';
-									const readmeContent =
-										widgetReadmeContent[config.readmePath(widgetName)];
-									const example = isBasic
-										? overview.example
-										: examples.find(
-												(example: any) =>
-													example.filename.toLowerCase() === exampleName
-										  );
-									if (!example) {
-										return null;
-									}
-									const widgetPath = config.examplePath(
-										widgetName,
-										example.filename
-									);
-									const content = widgetExampleContent[widgetPath];
-									const propertyInterface = widgetProperties[widgetName];
-									const themeClasses = widgetThemeClasses[widgetName];
-									return (
-										<div id="content">
-											<div id="app" classes="flex">
-												<div classes="pt-24 pb-16 lg:pt-28 w-full">
-													<div classes="flex">
-														<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
-															{isBasic && includeDocs && (
-																<div>
-																	<div
-																		innerHTML={readmeContent}
-																	/>
-																	<hr classes="my-8 border-b-2 border-gray-200" />
-																</div>
-															)}
-															<h2 classes={'text-3xl mb-4'}>
-																{isBasic
-																	? 'Basic Usage'
-																	: example.title}
-															</h2>
-															<Example
-																widgetName={widgetName}
-																content={content}
-															>
-																<example.module />
-															</Example>
-															<div classes={'my-8'}>
-																{config.codesandboxPath && (
-																	<a
-																		href={config.codesandboxPath(
-																			widgetName,
-																			example.filename
-																		)}
-																	>
-																		<img
-																			alt={`Edit ${widgetPath} example`}
-																			src="https://codesandbox.io/static/img/play-codesandbox.svg"
-																		/>
-																	</a>
-																)}
-															</div>
-															{isBasic && includeDocs && (
-																<PropertyTable
-																	props={propertyInterface}
-																/>
-															)}
-															{isBasic && includeDocs && (
-																<ThemeTable themes={themeClasses} />
-															)}
-															{config.tests && (
-																<div>
-																	<hr classes="my-8 border-b-2 border-gray-200" />
-																	<h2 classes={'text-3xl mb-4'}>
-																		Tests
-																	</h2>
-																	<iframe
-																		classes={'w-full'}
-																		onload={
-																			"this.style.height=this.contentDocument.body.scrollHeight +'px';" as any
-																		}
-																		src={`./intern?config=intern/intern.json&widget=${widgetName}`}
-																	/>
-																</div>
-															)}
-														</div>
-														<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
-															<div classes="flex flex-col justify-between overflow-y-auto sticky top-16 max-h-(screen-16) pt-12 pb-4 -mt-12">
-																<div classes="mb-8">
-																	<h5 classes="text-gray-500 uppercase tracking-wide font-bold text-sm lg:text-xs">
-																		{widgetName}
-																	</h5>
-																	<ul classes="mt-4 overflow-x-hidden">
-																		<li classes="mb-2">
-																			<ActiveLink
-																				key={'basic'}
-																				classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
-																				to="example"
-																				params={{
-																					widget: widgetName,
-																					example: 'basic'
-																				}}
-																				activeClasses={[
-																					'none'
-																				]}
-																			>
-																				Overview
-																			</ActiveLink>
-																		</li>
-																		<li classes="mb-2">
-																			<ActiveLink
-																				key={'basic'}
-																				classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
-																				to="example"
-																				params={{
-																					widget: widgetName,
-																					example: 'basic'
-																				}}
-																				activeClasses={[
-																					'none'
-																				]}
-																			>
-																				Tests
-																			</ActiveLink>
-																		</li>
-																	</ul>
-																	<hr classes="my-1 border-b-2 border-gray-200" />
-																	<ul classes="mt-4 overflow-x-hidden">
-																		{(
-																			widgetConfig.examples ||
-																			[]
-																		).map((example: any) => {
-																			return (
-																				<li classes="mb-2">
-																					<ActiveLink
-																						key={
-																							example.filename
-																						}
-																						classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
-																						to="example"
-																						params={{
-																							widget: widgetName,
-																							example: example.filename.toLowerCase()
-																						}}
-																						activeClasses={[
-																							'none'
-																						]}
-																					>
-																						{example.filename
-																							.replace(
-																								/([A-Z])/g,
-																								' $1'
-																							)
-																							.trim()}
-																					</ActiveLink>
-																				</li>
-																			);
-																		})}
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									);
+									return main({ test: false, config, widgetName, exampleName, widgetProperties, widgetThemeClasses, widgetExampleContent, widgetReadmeContent });
 								}}
 							/>
 						</div>
@@ -349,5 +356,4 @@ export default factory(function App({ properties, middleware: { block } }) {
 				</div>
 			</div>
 		);
-	}
 });
