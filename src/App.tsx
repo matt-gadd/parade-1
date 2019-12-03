@@ -80,7 +80,7 @@ const main = ({
 		? overview.example
 		: examples.find((example: any) => example.filename.toLowerCase() === exampleName);
 	let widgetPath, content, propertyInterface, themeClasses;
-	if (isBasic) {
+	if (!test) {
 		widgetPath = config.examplePath(widgetName, example.filename);
 		content = widgetExampleContent[widgetPath];
 		propertyInterface = widgetProperties[widgetName];
@@ -311,6 +311,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 							}}
 						/>
 						<Outlet
+							key="tests"
 							id="tests"
 							renderer={({ params, queryParams }) => {
 								const { widget: widgetName, example: exampleName } = params;
@@ -327,6 +328,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 							}}
 						/>
 						<Outlet
+							key="example"
 							id="example"
 							renderer={({ params, queryParams }) => {
 								const { widget: widgetName, example: exampleName } = params;
