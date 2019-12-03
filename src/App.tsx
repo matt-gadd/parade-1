@@ -131,7 +131,7 @@ const main = ({
 									<iframe
 										classes={'w-full'}
 										onload={
-											"this.style.height=this.contentDocument.body.scrollHeight +'px';" as any
+											"this.style.height=(this.contentDocument.body.scrollHeight || 10000) +'px';" as any
 										}
 										src={`./intern?config=intern/intern.json&widget=${widgetName}`}
 									/>
