@@ -6,6 +6,7 @@ import ButtonAdvanced from './example/ButtonAdvanced';
 export default {
 	name: '@dojo/widgets',
 	themes: [dojoTheme],
+	tests: (require as any).context('./', true, /\.spec\.ts(x)?$/),
 	home: 'src/button/README.md',
 	readmePath: (widget: string) => `src/${widget}/README.md`,
 	widgetPath: (widget: string, filename: string) => `src/${widget}/${filename}.tsx`,

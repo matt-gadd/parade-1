@@ -1,8 +1,5 @@
 import { create, tsx } from '@dojo/framework/core/vdom';
 import injector from '@dojo/framework/core/middleware/injector';
-import has from '@dojo/framework/core/has';
-
-import * as css from './Example.m.css';
 
 interface ExampleProperties {
 	content?: string;
@@ -12,7 +9,7 @@ interface ExampleProperties {
 const factory = create({ injector }).properties<ExampleProperties>();
 
 export default factory(function Example({ children, properties, middleware: { injector } }) {
-	const { content, widgetName } = properties();
+	const { content } = properties();
 
 	const tabs = [
 		<div
@@ -29,16 +26,6 @@ export default factory(function Example({ children, properties, middleware: { in
 				<pre classes={['bg-blue-900', 'language-ts', 'rounded', 'px-4', 'py-4']}>
 					<code classes={['language-ts']} innerHTML={content} />
 				</pre>
-			</div>
-		);
-	}
-	if (!has('docs')) {
-		tabs.push(
-			<div>
-				<iframe
-					classes={css.iframe}
-					src={`./intern?config=intern/intern.json&widget=${widgetName}`}
-				/>
 			</div>
 		);
 	}

@@ -245,6 +245,21 @@ export default factory(function App({ properties, middleware: { block } }) {
 															{isBasic && includeDocs && (
 																<ThemeTable themes={themeClasses} />
 															)}
+															{config.tests && (
+																<div>
+																	<hr classes="my-8 border-b-2 border-gray-200" />
+																	<h2 classes={'text-3xl mb-4'}>
+																		Tests
+																	</h2>
+																	<iframe
+																		classes={'w-full'}
+																		onload={
+																			"this.style.height=this.contentDocument.body.scrollHeight +'px';" as any
+																		}
+																		src={`./intern?config=intern/intern.json&widget=${widgetName}`}
+																	/>
+																</div>
+															)}
 														</div>
 														<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
 															<div classes="flex flex-col justify-between overflow-y-auto sticky top-16 max-h-(screen-16) pt-12 pb-4 -mt-12">

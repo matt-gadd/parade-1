@@ -20,7 +20,6 @@
   "dependencies": {
     "canonical-path": "1.0.0",
     "cldr-data": "36.0.0",
-    "intern": "4.6.0",
     "postcss": "7.0.21",
     "prismjs": "1.17.1",
     "rehype-stringify": "6.0.0",
@@ -39,6 +38,7 @@
     "@dojo/themes": "^6.0.0",
     "@dojo/widgets": "next",
     "@types/node": "~9.6.5",
+    "intern": "^4.6.0",
     "prettier": "^1.19.1",
     "shx": "^0.3.2",
     "typescript": "~3.4.5"
