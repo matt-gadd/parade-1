@@ -87,7 +87,7 @@ const main = ({
 		themeClasses = widgetThemeClasses[widgetName];
 	}
 	return (
-		<div id="content">
+		<div id="content" key={`${widgetName}-${exampleName}`}>
 			<div id="app" classes="flex">
 				<div classes="pt-24 pb-16 lg:pt-28 w-full">
 					<div classes="flex">
