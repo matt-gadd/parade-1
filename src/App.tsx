@@ -284,6 +284,25 @@ export default factory(function App({ properties, middleware: { block } }) {
 																				Overview
 																			</ActiveLink>
 																		</li>
+																		<li classes="mb-2">
+																			<ActiveLink
+																				key={'basic'}
+																				classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
+																				to="example"
+																				params={{
+																					widget: widgetName,
+																					example: 'basic'
+																				}}
+																				activeClasses={[
+																					'none'
+																				]}
+																			>
+																				Tests
+																			</ActiveLink>
+																		</li>
+																	</ul>
+																	<hr classes="my-1 border-b-2 border-gray-200" />
+																	<ul classes="mt-4 overflow-x-hidden">
 																		{(
 																			widgetConfig.examples ||
 																			[]
