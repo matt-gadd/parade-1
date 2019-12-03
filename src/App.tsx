@@ -211,7 +211,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 																	<hr classes="my-8 border-b-2 border-gray-200" />
 																</div>
 															)}
-															<h2 classes={'text-3xl'}>
+															<h2 classes={'text-3xl mb-4'}>
 																{isBasic
 																	? 'Basic Usage'
 																	: example.title}
@@ -222,16 +222,21 @@ export default factory(function App({ properties, middleware: { block } }) {
 															>
 																<example.module />
 															</Example>
-															{config.codesandboxPath && (
-																<a
-																	href={config.codesandboxPath(widgetName, example.filename)}
-																>
-																	<img
-																		alt={`Edit ${widgetPath} example`}
-																		src="https://codesandbox.io/static/img/play-codesandbox.svg"
-																	/>
-																</a>
-															)}
+															<div classes={'my-8'}>
+																{config.codesandboxPath && (
+																	<a
+																		href={config.codesandboxPath(
+																			widgetName,
+																			example.filename
+																		)}
+																	>
+																		<img
+																			alt={`Edit ${widgetPath} example`}
+																			src="https://codesandbox.io/static/img/play-codesandbox.svg"
+																		/>
+																	</a>
+																)}
+															</div>
 															{isBasic && includeDocs && (
 																<PropertyTable
 																	props={propertyInterface}

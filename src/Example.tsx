@@ -15,16 +15,18 @@ export default factory(function Example({ children, properties, middleware: { in
 	const { content, widgetName } = properties();
 
 	const tabs = [
-		<div>
-			<h3 classes={'text-2xl'}>Demo</h3>
-			<div classes={'px-4 py-12 border-2 border-gray-400'}>{children()}</div>
+		<div
+			classes={
+				'bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4'
+			}
+		>
+			{children()}
 		</div>
 	];
 	if (content) {
 		tabs.push(
-			<div>
-				<h3 classes={'text-2xl'}>Code</h3>
-				<pre classes={['language-ts']}>
+			<div classes={'rounded-b-lg bg-gray-800'}>
+				<pre classes={['bg-blue-900', 'language-ts', 'rounded', 'px-4', 'py-4']}>
 					<code classes={['language-ts']} innerHTML={content} />
 				</pre>
 			</div>

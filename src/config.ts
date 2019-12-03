@@ -11,7 +11,7 @@ export default {
 	widgetPath: (widget: string, filename: string) => `src/${widget}/${filename}.tsx`,
 	examplePath: (widget: string, filename: string) => `src/example/${filename}.tsx`,
 	codesandboxPath: (widget: string, filename: string) => {
-		return `https://codesandbox.io/s/github/dojo/widgets/tree/master/src/examples?fontsize=14&initialpath=%23%2Fwidget%2F${widget}%2F${filename.toLowerCase()}&module=%2Fsrc%2Fwidgets%2F${widget}%2F${filename}.tsx`
+		return `https://codesandbox.io/s/github/dojo/widgets/tree/master/src/examples?fontsize=14&initialpath=%23%2Fwidget%2F${widget}%2F${filename.toLowerCase()}&module=%2Fsrc%2Fwidgets%2F${widget}%2F${filename}.tsx`;
 	},
 	widgets: {
 		button: {
