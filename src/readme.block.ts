@@ -13,6 +13,7 @@ function markdown(content: string) {
 		.use(sectionize)
 		.use(remark2rehype)
 		.use(addClasses, {
+			p: 'inline',
 			ul: 'list-disc list-inside my-4',
 			h1: 'text-3xl mb-4',
 			h2: 'text-2xl my-4',
