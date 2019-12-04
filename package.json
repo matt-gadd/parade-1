@@ -22,9 +22,11 @@
     "cldr-data": "36.0.0",
     "postcss": "7.0.21",
     "prismjs": "1.17.1",
+    "rehype-add-classes": "^1.0.0",
     "rehype-stringify": "6.0.0",
     "remark-parse": "7.0.1",
     "remark-rehype": "5.0.0",
+    "remark-sectionize": "^1.1.0",
     "ts-morph": "4.2.0",
     "tslib": "~1.9.1",
     "unified": "8.4.1"

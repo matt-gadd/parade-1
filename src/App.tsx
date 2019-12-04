@@ -95,12 +95,12 @@ const main = ({
 							{isBasic && (
 								<div>
 									<div innerHTML={readmeContent} />
-									<hr classes="my-8 border-b-2 border-gray-200" />
+									<hr classes="my-6 border-b-2 border-gray-200" />
 								</div>
 							)}
 							{!test && (
 								<div>
-									<h2 classes={'text-3xl mb-4'}>
+									<h2 classes={'text-2xl mb-4'}>
 										{isBasic ? 'Basic Usage' : example.title}
 									</h2>
 									<Example widgetName={widgetName} content={content}>
@@ -127,7 +127,7 @@ const main = ({
 							)}
 							{config.tests && test && (
 								<div>
-									<h2 classes={'text-3xl mb-4'}>Tests</h2>
+									<h2 classes={'text-2xl mb-4'}>Tests</h2>
 									<iframe
 										classes={'w-full'}
 										onload={

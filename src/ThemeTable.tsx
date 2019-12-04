@@ -13,8 +13,8 @@ export default factory(function ThemeTable({ properties }) {
 	}
 	return (
 		<virtual>
-			<hr classes="my-8 border-b-2 border-gray-200" />
-			<h2 classes={'text-3xl mb-4'}>Theme</h2>
+			<hr classes="my-6 border-b-2 border-gray-200" />
+			<h2 classes={'text-2xl mb-4'}>Theme</h2>
 			<div classes={'bg-white rounded-lg border border-gray-400 inline-block'}>
 				<table>
 					<thead>
