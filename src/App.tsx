@@ -10,6 +10,8 @@ import MainMenu from './MainMenu';
 import Landing from './Landing';
 import SideBar from './SideBar';
 import Overview from './Overview';
+import Test from './Test';
+import Header from './Header';
 
 function getWidgetFileNames(config: any, widgetPathFunc: any): { [index: string]: string } {
 	return Object.keys(config).reduce((newConfig, widget) => {
@@ -44,11 +46,7 @@ function getExampleFileNames(config: any, examplePathFunc: any): string[] {
 	return filenames;
 }
 
-interface AppProperties {
-	config: any;
-}
-
-const factory = create({ block }).properties<AppProperties>();
+const factory = create({ block }).properties<{ config: any }>();
 
 export default factory(function App({ properties, middleware: { block } }) {
 	const { config } = properties();
@@ -64,34 +62,10 @@ export default factory(function App({ properties, middleware: { block } }) {
 	const widgetThemeClasses = block(getTheme)(widgetFilenames) || {};
 	return (
 		<div>
-			<div
-				classes={
-					'flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center'
-				}
-			>
-				<div classes={'w-full max-w-screen-xl relative mx-auto px-6'}>
-					<div classes={'flex items-center -mx-6'}>
-						<div classes={'lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8'}>
-							<h1 classes={'text-4xl'}>{config.name || 'Parade'}</h1>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Header config={config} />
 			<div classes={'w-full max-w-screen-xl mx-auto px-6'}>
 				<div classes={'lg:flex -mx-6'}>
-					<div
-						classes={
-							'hidden fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5'
-						}
-					>
-						<div
-							classes={
-								'h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent'
-							}
-						>
-							<MainMenu config={config} />
-						</div>
-					</div>
+					<MainMenu config={config} />
 					<div
 						id="content-wrapper"
 						classes="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5"
@@ -116,9 +90,8 @@ export default factory(function App({ properties, middleware: { block } }) {
 												key="tests"
 												id="tests"
 												renderer={({ params, queryParams }) => {
-													return null;
-													/*const { widget: widgetName, example: exampleName } = params;
-													return <Tests />*/
+													const { widget: widgetName } = params;
+													return <Test widgetName={widgetName} />;
 												}}
 											/>
 											<Outlet
