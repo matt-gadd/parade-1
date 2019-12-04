@@ -126,12 +126,21 @@ export default factory(function App({ properties, middleware: { block } }) {
 												id="example"
 												renderer={({ params, queryParams }) => {
 													const { widget: widgetName } = params;
-													return <Overview widgetName={ widgetName } config={ config } widgetReadmes={ widgetReadmeContent } widgetProperties={ widgetProperties } widgetThemes={ widgetThemeClasses } widgetExamples={ widgetExampleContent }/>
+													return (
+														<Overview
+															widgetName={widgetName}
+															config={config}
+															widgetReadmes={widgetReadmeContent}
+															widgetProperties={widgetProperties}
+															widgetThemes={widgetThemeClasses}
+															widgetExamples={widgetExampleContent}
+														/>
+													);
 												}}
 											/>
 										</div>
 										<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
-											{ /*<SideBar config={config} widgetName={widgetName} />*/ }
+											{/*<SideBar config={config} widgetName={widgetName} />*/}
 										</div>
 									</div>
 								</div>
