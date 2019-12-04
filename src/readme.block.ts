@@ -16,7 +16,8 @@ function markdown(content: string) {
 			ul: 'list-disc my-4',
 			h1: 'text-3xl mb-4',
 			h2: 'text-2xl my-4',
-			h3: 'text-2xl my-4'
+			h3: 'text-2xl my-4',
+			pre: 'bg-blue-900 rounded px-4 py-4 my-4'
 		})
 		.use(stringify)
 		.processSync(content)

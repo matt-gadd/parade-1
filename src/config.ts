@@ -7,7 +7,7 @@ export default {
 	name: '@dojo/widgets',
 	themes: [dojoTheme],
 	tests: (require as any).context('./', true, /\.spec\.ts(x)?$/),
-	home: 'src/button/README.md',
+	home: 'src/example/home.md',
 	readmePath: (widget: string) => `src/${widget}/README.md`,
 	widgetPath: (widget: string, filename: string) => `src/${widget}/${filename}.tsx`,
 	examplePath: (widget: string, filename: string) => `src/example/${filename}.tsx`,

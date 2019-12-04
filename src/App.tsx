@@ -52,7 +52,6 @@ export function formatWidgetName(widget: string) {
 }
 
 interface AppProperties {
-	includeDocs: boolean;
 	config: any;
 }
 
