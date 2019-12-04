@@ -1,4 +1,6 @@
 import { create, tsx } from '@dojo/framework/core/vdom';
+import HorizontalRule from './HorizontalRule';
+import RoundedBox from './RoundedBox';
 
 interface ThemeTableProperties {
 	themes?: { [index: string]: string };
@@ -13,9 +15,9 @@ export default factory(function ThemeTable({ properties }) {
 	}
 	return (
 		<virtual>
-			<hr classes="my-6 border-b-2 border-gray-200" />
+			<HorizontalRule />
 			<h2 classes={'text-2xl mb-4'}>Theme</h2>
-			<div classes={'bg-white rounded-lg border border-gray-400 inline-block'}>
+			<RoundedBox>
 				<table>
 					<thead>
 						<tr>
@@ -46,7 +48,7 @@ export default factory(function ThemeTable({ properties }) {
 						})}
 					</tbody>
 				</table>
-			</div>
+			</RoundedBox>
 		</virtual>
 	);
 });

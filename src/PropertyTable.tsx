@@ -1,4 +1,6 @@
 import { create, tsx } from '@dojo/framework/core/vdom';
+import HorizontalRule from './HorizontalRule';
+import RoundedBox from './RoundedBox';
 import { PropertyInterface } from './properties.block';
 
 interface PropertyTableProperties {
@@ -14,9 +16,9 @@ export default factory(function PropertyTable({ properties }) {
 	}
 	return (
 		<virtual>
-			<hr classes="my-6 border-b-2 border-gray-200" />
+			<HorizontalRule />
 			<h2 classes={'text-2xl mb-4'}>Properties</h2>
-			<div classes={'bg-white rounded-lg border border-gray-400 inline-block'}>
+			<RoundedBox>
 				<table>
 					<thead>
 						<tr>
@@ -57,7 +59,7 @@ export default factory(function PropertyTable({ properties }) {
 						})}
 					</tbody>
 				</table>
-			</div>
+			</RoundedBox>
 		</virtual>
 	);
 });
