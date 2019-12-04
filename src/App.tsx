@@ -27,6 +27,9 @@ function getReadmeFileNames(config: any, readmePathFunc: any): string[] {
 	Object.keys(config).forEach((key) => {
 		filenames.push(readmePathFunc(key));
 	});
+	if (config.home) {
+		filenames.push(config.home);
+	}
 	return filenames;
 }
 
@@ -53,13 +56,12 @@ export default factory(function App({ properties, middleware: { block } }) {
 	const widgetFilenames = getWidgetFileNames(config.widgets, config.widgetPath);
 	const exampleFilenames = getExampleFileNames(config.widgets, config.examplePath);
 	const readmeFilenames = getReadmeFileNames(config.widgets, config.readmePath);
-	if (config.home) {
-		readmeFilenames.push(config.home);
-	}
+
 	const widgetReadmeContent = block(readme)(readmeFilenames) || {};
 	const widgetExampleContent = block(code)(exampleFilenames) || {};
 	const widgetProperties = block(getWidgetProperties)(widgetFilenames) || {};
 	const widgetThemeClasses = block(getTheme)(widgetFilenames) || {};
+
 	return (
 		<div>
 			<Header config={config} />
@@ -113,7 +115,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 											/>
 										</div>
 										<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
-											{/*<SideBar config={config} widgetName={widgetName} />*/}
+											<SideBar config={config} widgetName="button" />
 										</div>
 									</div>
 								</div>

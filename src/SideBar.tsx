@@ -40,7 +40,7 @@ export default factory(function SideBar({ properties }) {
 				</ul>
 				<hr classes="my-1 border-b-2 border-gray-200" />
 				<ul classes="mt-4 overflow-x-hidden">
-					{(config[widgetName].examples || []).map((example: any) => {
+					{(config.widgets[widgetName].examples || []).map((example: any) => {
 						return (
 							<li classes="mb-2">
 								<ActiveLink
