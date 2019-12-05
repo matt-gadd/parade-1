@@ -6,9 +6,9 @@ export default factory(function Test({ properties }) {
 	const { widgetName } = properties();
 	return (
 		<div>
-			<h2 classes={'text-2xl mb-4'}>Tests</h2>
+			<h2 classes="text-2xl mb-4">Tests</h2>
 			<iframe
-				classes={'w-full'}
+				classes="w-full"
 				onload={
 					"this.style.height=(this.contentDocument.body.scrollHeight || 10000) +'px';" as any
 				}

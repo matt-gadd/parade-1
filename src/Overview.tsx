@@ -41,20 +41,16 @@ export default factory(function Overview({ properties }) {
 		<div>
 			{isOverview && <div innerHTML={widgetReadme} />}
 			{isOverview && <HorizontalRule />}
-			<h2 classes={'text-2xl mb-4'}>Basic Usage</h2>
-			<div
-				classes={
-					'bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4'
-				}
-			>
+			<h2 classes="text-2xl mb-4">Basic Usage</h2>
+			<div classes="bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4">
 				<example.overview.example.module />
 			</div>
-			<div classes={'rounded-b-lg bg-gray-800'}>
-				<pre classes={['bg-blue-900', 'language-ts', 'rounded', 'px-4', 'py-4']}>
-					<code classes={['language-ts']} innerHTML={widgetExample} />
+			<div classes="rounded-b-lg bg-gray-800">
+				<pre classes="bg-blue-900 language-ts rounded px-4 py-4">
+					<code classes="language-ts" innerHTML={widgetExample} />
 				</pre>
 			</div>
-			<div classes={'my-4'}>
+			<div classes="my-4">
 				<a href={codesandboxPath}>
 					<img
 						alt={`Edit ${examplePath} example`}

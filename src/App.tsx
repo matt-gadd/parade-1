@@ -2,16 +2,17 @@ import { create, tsx } from '@dojo/framework/core/vdom';
 import block from '@dojo/framework/core/middleware/block';
 import Outlet from '@dojo/framework/routing/Outlet';
 
-import readme from './readme.block';
-import getWidgetProperties from './properties.block';
-import getTheme from './theme.block';
-import code from './code.block';
 import MainMenu from './MainMenu';
 import Landing from './Landing';
 import SideBar from './SideBar';
 import Overview from './Overview';
 import Test from './Test';
 import Header from './Header';
+
+import readme from './readme.block';
+import getWidgetProperties from './properties.block';
+import getTheme from './theme.block';
+import code from './code.block';
 
 function getWidgetFileNames(config: any): { [index: string]: string } {
 	return Object.keys(config.widgets).reduce((newConfig, widget) => {
@@ -65,8 +66,8 @@ export default factory(function App({ properties, middleware: { block } }) {
 	return (
 		<div>
 			<Header config={config} />
-			<div classes={'w-full max-w-screen-xl mx-auto px-6'}>
-				<div classes={'lg:flex -mx-6'}>
+			<div classes="w-full max-w-screen-xl mx-auto px-6">
+				<div classes="lg:flex -mx-6">
 					<MainMenu config={config} />
 					<div
 						id="content-wrapper"
@@ -76,6 +77,7 @@ export default factory(function App({ properties, middleware: { block } }) {
 							<div id="app" classes="flex">
 								<div classes="pt-24 pb-16 lg:pt-28 w-full">
 									<Outlet
+										key="landing"
 										id="landing"
 										renderer={() => {
 											return (

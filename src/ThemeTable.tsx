@@ -16,23 +16,15 @@ export default factory(function ThemeTable({ properties }) {
 	return (
 		<virtual>
 			<HorizontalRule />
-			<h2 classes={'text-2xl mb-4'}>Theme</h2>
+			<h2 classes="text-2xl mb-4">Theme</h2>
 			<RoundedBox>
 				<table>
 					<thead>
 						<tr>
-							<th
-								classes={
-									'px-4 py-2 border-r border-b border-gray-400 text-sm font-semibold text-gray-700 p-2 bg-gray-100 rounded-tl-lg'
-								}
-							>
+							<th classes="px-4 py-2 border-r border-b border-gray-400 text-sm font-semibold text-gray-700 p-2 bg-gray-100 rounded-tl-lg">
 								Name
 							</th>
-							<th
-								classes={
-									'px-4 py-2 border-b border-gray-400 text-sm font-semibold text-gray-700 p-2 bg-gray-100 rounded-tr-lg'
-								}
-							>
+							<th classes="px-4 py-2 border-b border-gray-400 text-sm font-semibold text-gray-700 p-2 bg-gray-100 rounded-tr-lg">
 								Description
 							</th>
 						</tr>
@@ -41,8 +33,8 @@ export default factory(function ThemeTable({ properties }) {
 						{Object.keys(themes).map((key) => {
 							return (
 								<tr>
-									<td classes={'px-4 py-2 text-sm'}>{key}</td>
-									<td classes={'px-4 py-2 text-sm'}>{themes[key]}</td>
+									<td classes="px-4 py-2 text-sm">{key}</td>
+									<td classes="px-4 py-2 text-sm">{themes[key]}</td>
 								</tr>
 							);
 						})}
