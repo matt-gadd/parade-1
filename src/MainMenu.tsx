@@ -42,12 +42,9 @@ export default factory(function MainMenu({ properties }) {
 						{widgets.map((widget) => {
 							return (
 								<ActiveLink
-									to="example"
+									to="overview"
 									classes="flex items-center px-2 -mx-2 py-1 hover:text-gray-900 font-medium text-gray-600"
-									params={{
-										widget,
-										example: 'basic'
-									}}
+									params={{ widget }}
 									matchParams={{ widget }}
 									activeClasses={['font-bold']}
 								>

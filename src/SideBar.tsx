@@ -15,12 +15,10 @@ export default factory(function SideBar({ properties }) {
 				<ul classes="mt-4 overflow-x-hidden">
 					<li classes="mb-2">
 						<ActiveLink
-							key={'basic'}
 							classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
-							to="example"
+							to="overview"
 							params={{
-								widget: widgetName,
-								example: 'basic'
+								widget: widgetName
 							}}
 							activeClasses={['font-bold']}
 						>
@@ -29,7 +27,6 @@ export default factory(function SideBar({ properties }) {
 					</li>
 					<li classes="mb-2">
 						<ActiveLink
-							key={'basic'}
 							classes="block transition-fast hover:translate-r-2px hover:text-gray-900 text-gray-600 font-medium"
 							to="tests"
 							activeClasses={['font-bold']}

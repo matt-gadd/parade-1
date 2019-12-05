@@ -13,19 +13,19 @@ import Overview from './Overview';
 import Test from './Test';
 import Header from './Header';
 
-function getWidgetFileNames(config: any, widgetPathFunc: any): { [index: string]: string } {
-	return Object.keys(config).reduce((newConfig, widget) => {
+function getWidgetFileNames(config: any): { [index: string]: string } {
+	return Object.keys(config.widgets).reduce((newConfig, widget) => {
 		return {
 			...newConfig,
-			[widget]: widgetPathFunc(widget, config[widget].filename)
+			[widget]: config.widgetPath(widget, config.widgets[widget].filename)
 		};
 	}, {});
 }
 
-function getReadmeFileNames(config: any, readmePathFunc: any): string[] {
+function getReadmeFileNames(config: any): string[] {
 	const filenames: string[] = [];
-	Object.keys(config).forEach((key) => {
-		filenames.push(readmePathFunc(key));
+	Object.keys(config.widgets).forEach((key) => {
+		filenames.push(config.readmePath(key));
 	});
 	if (config.home) {
 		filenames.push(config.home);
@@ -33,16 +33,16 @@ function getReadmeFileNames(config: any, readmePathFunc: any): string[] {
 	return filenames;
 }
 
-function getExampleFileNames(config: any, examplePathFunc: any): string[] {
+function getExampleFileNames(config: any): string[] {
 	const filenames: string[] = [];
-	Object.keys(config).forEach((key) => {
-		const widget = config[key];
+	Object.keys(config.widgets).forEach((key) => {
+		const widget = config.widgets[key];
 		if (widget.overview && widget.overview.example) {
-			filenames.push(examplePathFunc(key, widget.overview.example.filename));
+			filenames.push(config.examplePath(key, widget.overview.example.filename));
 		}
 		if (widget.examples) {
 			widget.examples.forEach((example: any) => {
-				filenames.push(examplePathFunc(key, example.filename));
+				filenames.push(config.examplePath(key, example.filename));
 			});
 		}
 	});
@@ -53,9 +53,9 @@ const factory = create({ block }).properties<{ config: any }>();
 
 export default factory(function App({ properties, middleware: { block } }) {
 	const { config } = properties();
-	const widgetFilenames = getWidgetFileNames(config.widgets, config.widgetPath);
-	const exampleFilenames = getExampleFileNames(config.widgets, config.examplePath);
-	const readmeFilenames = getReadmeFileNames(config.widgets, config.readmePath);
+	const widgetFilenames = getWidgetFileNames(config);
+	const exampleFilenames = getExampleFileNames(config);
+	const readmeFilenames = getReadmeFileNames(config);
 
 	const widgetReadmeContent = block(readme)(readmeFilenames) || {};
 	const widgetExampleContent = block(code)(exampleFilenames) || {};
@@ -75,33 +75,49 @@ export default factory(function App({ properties, middleware: { block } }) {
 						<div id="content">
 							<div id="app" classes="flex">
 								<div classes="pt-24 pb-16 lg:pt-28 w-full">
-									<div classes="flex">
-										<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
-											<Outlet
-												id="landing"
-												renderer={() => {
-													return (
+									<Outlet
+										id="landing"
+										renderer={() => {
+											return (
+												<div classes="flex">
+													<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
 														<Landing
 															config={config}
 															widgetReadmes={widgetReadmeContent}
 														/>
-													);
-												}}
-											/>
-											<Outlet
-												key="tests"
-												id="tests"
-												renderer={({ params, queryParams }) => {
-													const { widget: widgetName } = params;
-													return <Test widgetName={widgetName} />;
-												}}
-											/>
-											<Outlet
-												key="example"
-												id="example"
-												renderer={({ params, queryParams }) => {
-													const { widget: widgetName } = params;
-													return (
+													</div>
+												</div>
+											);
+										}}
+									/>
+									<Outlet
+										key="tests"
+										id="tests"
+										renderer={({ params, queryParams }) => {
+											const { widget: widgetName } = params;
+											return (
+												<div classes="flex">
+													<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
+														<Test widgetName={widgetName} />
+													</div>
+													<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
+														<SideBar
+															config={config}
+															widgetName={widgetName}
+														/>
+													</div>
+												</div>
+											);
+										}}
+									/>
+									<Outlet
+										key="overview"
+										id="overview"
+										renderer={({ params, queryParams }) => {
+											const { widget: widgetName } = params;
+											return (
+												<div classes="flex">
+													<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
 														<Overview
 															widgetName={widgetName}
 															config={config}
@@ -110,14 +126,48 @@ export default factory(function App({ properties, middleware: { block } }) {
 															widgetThemes={widgetThemeClasses}
 															widgetExamples={widgetExampleContent}
 														/>
-													);
-												}}
-											/>
-										</div>
-										<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
-											<SideBar config={config} widgetName="button" />
-										</div>
-									</div>
+													</div>
+													<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
+														<SideBar
+															config={config}
+															widgetName={widgetName}
+														/>
+													</div>
+												</div>
+											);
+										}}
+									/>
+									<Outlet
+										key="example"
+										id="example"
+										renderer={({ params, queryParams }) => {
+											const {
+												widget: widgetName,
+												example: exampleName
+											} = params;
+											return (
+												<div classes="flex">
+													<div classes="markdown px-6 xl:px-12 w-full max-w-3xl mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4">
+														<Overview
+															widgetName={widgetName}
+															exampleName={exampleName}
+															config={config}
+															widgetReadmes={widgetReadmeContent}
+															widgetProperties={widgetProperties}
+															widgetThemes={widgetThemeClasses}
+															widgetExamples={widgetExampleContent}
+														/>
+													</div>
+													<div classes="hidden xl:text-sm xl:block xl:w-1/4 xl:px-6">
+														<SideBar
+															config={config}
+															widgetName={widgetName}
+														/>
+													</div>
+												</div>
+											);
+										}}
+									/>
 								</div>
 							</div>
 						</div>

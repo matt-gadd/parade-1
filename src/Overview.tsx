@@ -3,10 +3,10 @@ import { create, tsx } from '@dojo/framework/core/vdom';
 import HorizontalRule from './HorizontalRule';
 import ThemeTable from './ThemeTable';
 import PropertyTable from './PropertyTable';
-import Example from './Example';
 
 const factory = create().properties<{
 	widgetName: string;
+	exampleName?: string;
 	widgetReadmes: any;
 	widgetExamples: any;
 	widgetProperties: any;
@@ -18,12 +18,14 @@ export default factory(function Overview({ properties }) {
 	const {
 		config,
 		widgetName,
+		exampleName,
 		widgetReadmes,
 		widgetExamples,
 		widgetProperties,
 		widgetThemes
 	} = properties();
 
+	const isOverview = !exampleName;
 	const example = config.widgets[widgetName];
 	const filename = example.overview.example.filename;
 	const codesandboxPath = config.codesandboxPath(widgetName, filename);
@@ -37,8 +39,8 @@ export default factory(function Overview({ properties }) {
 
 	return (
 		<div>
-			<div innerHTML={widgetReadme} />
-			<HorizontalRule />
+			{isOverview && <div innerHTML={widgetReadme} />}
+			{isOverview && <HorizontalRule />}
 			<h2 classes={'text-2xl mb-4'}>Basic Usage</h2>
 			<div
 				classes={
@@ -60,8 +62,8 @@ export default factory(function Overview({ properties }) {
 					/>
 				</a>
 			</div>
-			<PropertyTable props={widgetProperty} />
-			<ThemeTable themes={widgetTheme} />
+			{isOverview && <PropertyTable props={widgetProperty} />}
+			{isOverview && <ThemeTable themes={widgetTheme} />}
 		</div>
 	);
 });

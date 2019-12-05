@@ -5,15 +5,18 @@ export default [
 		defaultRoute: true
 	},
 	{
-		path: 'tests/{widget}',
-		outlet: 'tests'
-	},
-	{
 		path: 'widget/{widget}',
-		outlet: 'basic',
 		children: [
 			{
-				path: '{example}',
+				path: 'tests',
+				outlet: 'tests'
+			},
+			{
+				path: 'overview',
+				outlet: 'overview'
+			},
+			{
+				path: 'example/{example}',
 				outlet: 'example'
 			}
 		]
