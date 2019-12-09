@@ -22,7 +22,7 @@ export default ({ config }: { config: any }) => {
 		});
 	} else {
 		const registry = new Registry();
-		const [ theme ] = themes;
+		const [theme] = themes;
 		registerThemeInjector(theme.theme, registry);
 		registerRouterInjector(routes, registry);
 
